@@ -23,9 +23,33 @@ public class CarController : MonoBehaviour
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
     }
+
+    private void FixedUpdate()
+    {
+        Move();
+        Steering();
+    }
     private void Move()
     {
+        foreach(Wheel wheel in wheels)
+        {
+            if (wheel.isRear)
+                wheel.collider.motorTorque = verticalInput * motorStrenght;
 
+
+            
+        }
+    }
+
+    private void Steering()
+    {
+        foreach (Wheel wheel in wheels)
+        {
+            if (wheel.isRear)
+                continue;
+            wheel.collider.steerAngle = rotateAngle * horizontalInput;
+
+        }
     }
 }
 
