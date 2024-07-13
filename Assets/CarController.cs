@@ -36,7 +36,7 @@ public class CarController : MonoBehaviour
             if (wheel.isRear)
                 wheel.collider.motorTorque = verticalInput * motorStrenght;
 
-
+            wheel.UpdatePosition();
             
         }
     }
@@ -59,4 +59,13 @@ public struct Wheel
     public WheelCollider collider;
     public Transform meshPozition;
     public bool isRear;
+
+    public void UpdatePosition()
+    {
+        Vector3 position;
+        Quaternion rotation;
+        collider.GetWorldPose(out position, out rotation);
+        meshPozition.position = position;
+        meshPozition.rotation = rotation;
+    }
 }
